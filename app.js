@@ -23,7 +23,7 @@ Array.prototype.shuffle = function(){
 
 class Game {
     constructor(){
-        this.password = ['a','a','b','b','c','c','d','d','e','e','f','f','g','g','h','h']
+        this.password = ['A', 'A', 'B', 'B', 'C', 'C', 'D', 'D', 'E', 'E', 'F', 'F', 'G', 'G', 'H', 'H']
         this.mixedPassword = this.password.shuffle()
         this.firstShoot = null
         this.waiter = false
@@ -32,40 +32,31 @@ class Game {
     }
     makeBoard(){
 
-        this.mixedPassword.map((value,index) => {
-
-            
+        this.mixedPassword.map((value,index) => {  
             const div = document.createElement('div')
-              
             div.classList.add('tile')
             
             div.addEventListener('click',()=>{
-               
-                this.waiter || this.shoot(value, index)
-                
+                this.waiter || this.shoot(value, index)     
             })
 
-            document.querySelector('.board').appendChild(div)
-            
+            document.querySelector('.board').appendChild(div)      
         })
     }
     shoot(value,index){
-        
         document.querySelector('.board').childNodes[index].textContent = value
 
     if( this.firstShoot === null && !this.shooted.includes(value)){
-        this.firstShoot = index
-        
+        this.firstShoot = index     
     }
+    
     else if( this.firstShoot !== null && this.firstShoot !== index){
       
-       
         if(this.mixedPassword[this.firstShoot] === this.mixedPassword[index]){
           this.firstShoot = null
           this.score++
           this.shooted += value
-          this.areWeTheChampions()
-          
+          this.areWeTheChampions() 
         }
         else{
             
@@ -78,15 +69,11 @@ class Game {
                 this.waiter = false
             },2000)
         }
-
     }
-    
     }
-
     areWeTheChampions(){
         
         this.score === this.mixedPassword.length / 2 && setTimeout(() => alert('Congratulations !!!  Victory!!!'),200 ) 
-        
     }
 }
 
